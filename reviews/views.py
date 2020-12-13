@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from reviews.models import Mouse, Keyboard
-from reviews.serializers import MouseSerializer, KeyboardSerializer
+from reviews.models import Mouse, Keyboard, MouseReview, KeyboardReview
+from reviews.serializers import MouseSerializer, KeyboardSerializer, MouseReviewSerializer, KeyboardReviewSerializer
 
 
 class MouseViewset(viewsets.ModelViewSet):
@@ -38,4 +38,14 @@ class KeyboardViewset(viewsets.ModelViewSet):
             queryset = Keyboard.objects.filter(is_backlit=request.query_params.get('backlit'))
             serializer = KeyboardSerializer(queryset, many=True)
             return Response(data=serializer.data)
+
+
+class MouseReviewViewset(viewsets.ModelViewSet):
+    queryset = MouseReview.objects.all()
+    serializer_class = MouseReviewSerializer
+
+
+class KeyboardReviewViewset(viewsets.ModelViewSet):
+    queryset = KeyboardReview.objects.all()
+    serializer_class = KeyboardReviewSerializer
 
