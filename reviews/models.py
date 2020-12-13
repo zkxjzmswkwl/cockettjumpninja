@@ -36,3 +36,16 @@ class MouseReview(models.Model):
 
     def __str__(self):
         return f'{self.author} - {self.mouse.model_name}'
+
+
+class KeyboardReview(models.Model):
+    keyboard = models.ForeignKey(Keyboard, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    rating = models.IntegerField(
+        default=1,
+        validators=[MaxValueValidator(10), MinValueValidator(1)]
+    )
+    author = models.CharField(max_length=32, blank=False, null=False)
+
+    def __str__(self):
+        return f'{self.author} - {self.keyboard.model_name}'
