@@ -22,7 +22,7 @@ class Keyboard(models.Model):
     is_backlit = models.BooleanField()
 
     def __str__(self):
-        return f'{company} {model_name}'
+        return f'{self.company} {self.model_name}'
 
 
 class MouseReview(models.Model):
@@ -33,6 +33,7 @@ class MouseReview(models.Model):
         validators=[MaxValueValidator(10), MinValueValidator(1)]
     )
     author = models.CharField(max_length=32, blank=False, null=False)
+    body = models.TextField(max_length=15000, blank=False, null=False)
 
     def __str__(self):
         return f'{self.author} - {self.mouse.model_name}'
@@ -46,6 +47,7 @@ class KeyboardReview(models.Model):
         validators=[MaxValueValidator(10), MinValueValidator(1)]
     )
     author = models.CharField(max_length=32, blank=False, null=False)
+    body = models.TextField(max_length=15000, blank=False, null=False)
 
     def __str__(self):
         return f'{self.author} - {self.keyboard.model_name}'
